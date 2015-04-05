@@ -75,11 +75,11 @@ namespace VasScienceContainer
 
             if (scienceBoxModule.GetStoredDataCount() < scienceBoxModule.capacity)
             {
-                loadSci.guiName = "Load Science";
+                loadSci.guiName = "Store Sample";
             }
             else
             {
-                loadSci.guiName = "Science Full";
+                loadSci.guiName = "Container Locked";
             }
 
             BaseEvent revSci = this.Events.Find(e => e.name == "ReviewData");
@@ -96,10 +96,10 @@ namespace VasScienceContainer
         [KSPField(isPersistant = true, guiActive = false, guiActiveEditor = false, guiName = "AnimationDelayTime")] //not player exposed, sets how long the delay is before the reverse animation starts playing, from the part.cfg file
         public float AnimationDelayTime = 10;
 
-        [KSPEvent(active = true, guiActive = false, guiActiveEditor = false, guiName = "Load Science", guiActiveUnfocused = true, externalToEVAOnly = true)] //our button to expose on the right click menu, only show when on eva
+        [KSPEvent(active = true, guiActive = false, guiActiveEditor = false, guiName = "Store Sample", guiActiveUnfocused = true, externalToEVAOnly = true)] //our button to expose on the right click menu, only show when on eva
         public void LoadScience()
         {
-            if (loadSci.guiName == "Load Science")
+            if (loadSci.guiName == "Store Sample")
             {
                 scienceBoxModule.StoreDataExternalEvent(); //run sience load routine from the ModuleScienceContainer
                 if (animationModule.Progress == 0) //check that animation has finished playing and is reset to start
@@ -113,7 +113,7 @@ namespace VasScienceContainer
             CheckButtonVisibility();
         }
 
-        [KSPEvent(active = true, guiActive = true, guiActiveEditor = false, guiName = "Review Data", guiActiveUnfocused = true, externalToEVAOnly = false)] //our button to expose on the right click menu once science is loaded
+        [KSPEvent(active = true, guiActive = true, guiActiveEditor = false, guiName = "View Sample Data", guiActiveUnfocused = true, externalToEVAOnly = false)] //our button to expose on the right click menu once science is loaded
         public void ReviewData()
         {
             scienceBoxModule.ReviewDataEvent();
